@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/endpoint")
-    fun getPosts(@Query("page") page : Int) : Call<PostListResponse>
+    @GET("endpoint/concelhos")
+    //fun getPosts(@Query("page") page : Int) : Call<PostListResponse>
+    fun getPosts() : Call<PostListResponse>
 }
