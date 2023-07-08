@@ -9,10 +9,10 @@
         android:id="@+id/dataRoot"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_margin="50dp"
+        android:layout_margin="20dp"
         android:background="@drawable/bg_raw"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.Guideline
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="150dp" />
+            app:layout_constraintGuide_begin="140dp" />
 
         <TextView
             android:id="@+id/postName"
@@ -29,14 +29,15 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:text="Post Name"
+            android:textColor="@color/SandyTan"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/SandyTan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guildLine"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="16dp" />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/addDate"
             android:layout_width="16dp"
@@ -75,13 +76,15 @@
             app:layout_constraintBottom_toBottomOf="@id/updateDate"
             app:layout_constraintStart_toEndOf="@id/updateDate"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
         <ImageView
             android:id="@+id/authorIcon"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/ic_author"
-            app:layout_constraintTop_toBottomOf="@id/updateDate"
-            app:layout_constraintStart_toStartOf="@id/guildLine" />
+            app:layout_constraintStart_toStartOf="@id/guildLine"
+            app:layout_constraintTop_toBottomOf="@id/updateDate" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,32 +92,34 @@
             android:textColor="@color/white"
             android:textSize="10sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/authorIcon"
             app:layout_constraintStart_toEndOf="@id/authorIcon"
-            app:layout_constraintTop_toTopOf="@id/authorIcon"
-            app:layout_constraintBottom_toBottomOf="@id/authorIcon" />
+            app:layout_constraintTop_toTopOf="@id/authorIcon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imgRoot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/dataRoot"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@id/dataRoot"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" >
+        app:layout_constraintStart_toStartOf="@id/dataRoot"
+        app:layout_constraintTop_toTopOf="@+id/dataRoot">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgPost"
             android:layout_width="115dp"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
+            android:layout_height="115dp"
             android:background="@color/white"
-            app:shapeAppearanceOverlay="@style/RoundedImageView"
-            app:srcCompat="@drawable/poster_placeholder"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/post_placeholder" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
