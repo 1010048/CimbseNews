@@ -1,6 +1,7 @@
 package com.example.cimbsenews.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
+import com.example.cimbsenews.DetailsPostActivity
 import com.example.cimbsenews.R
 import com.example.cimbsenews.databinding.ItemRowBinding
 import com.example.cimbsenews.response.PostListResponseItem
@@ -40,6 +42,13 @@ class PostAdapter(private val context: Context) :
                 }
                 updateDateTextView.text = item.update_date.toString()
                 AuthorNameTextView.text = item.author
+
+                itemView.setOnClickListener {
+                    val context = itemView.context
+                    val intent = Intent(context, DetailsPostActivity::class.java)
+                    intent.putExtra(DetailsPostActivity.EXTRA_URL, item.link) // Replace 'url' with the actual URL property in your item
+                    context.startActivity(intent)
+                }
             }
         }
     }
