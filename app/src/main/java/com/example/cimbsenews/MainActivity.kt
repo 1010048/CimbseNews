@@ -16,50 +16,44 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var postAdapter: PostAdapter // Declare the adapter variable
 
-    private val postAdapter by lazy {PostAdapter()}
-
-    private val api : ApiService by lazy {
+    private val api: ApiService by lazy {
         ApiClient().getClient().create(ApiService::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize the adapter with the context
+        postAdapter = PostAdapter(this)
+
         binding.apply {
-            prgBarPost.visibility= View.VISIBLE
+            prgBarPost.visibility = View.VISIBLE
 
             val callPostApi = api.getPosts()
-            callPostApi.enqueue(object : Callback<PostListResponse>{
-                /**
-                 * Invoked for a received HTTP response.
-                 *
-                 *
-                 * Note: An HTTP response may still indicate an application-level failure such as a 404 or 500.
-                 * Call [Response.isSuccessful] to determine if the response indicates success.
-                 */
+            callPostApi.enqueue(object : Callback<PostListResponse> {
                 override fun onResponse(
                     call: Call<PostListResponse>,
                     response: Response<PostListResponse>
                 ) {
-                    prgBarPost.visibility= View.GONE
-                    when(response.code()) {
+                    prgBarPost.visibility = View.GONE
+                    when (response.code()) {
                         in 200..299 -> {
                             Log.d("Response Code", " success messages : ${response.code()}")
-                                response.body()?.let { postListResponse ->
-                                    if (postListResponse.isNotEmpty()) {
-                                        postAdapter.differ.submitList(postListResponse)
-                                        //Recycler
-                                        rlPosts.apply {
+                            response.body()?.let { postListResponse ->
+                                if (postListResponse.isNotEmpty()) {
+                                    postAdapter.submitList(postListResponse)
+                                    //Recycler
+                                    rlPosts.apply {
                                         layoutManager = LinearLayoutManager(this@MainActivity)
                                         adapter = postAdapter
-                                        }
                                     }
                                 }
-
+                            }
                         }
                         in 300..399 -> {
                             Log.d("Response Code", " Redirection messages : ${response.code()}")
@@ -70,19 +64,13 @@ class MainActivity : AppCompatActivity() {
                         in 500..599 -> {
                             Log.d("Response Code", " Server error responses : ${response.code()}")
                         }
-
                     }
                 }
 
-                /**
-                 * Invoked when a network exception occurred talking to the server or when an unexpected exception
-                 * occurred creating the request or processing the response.
-                 */
                 override fun onFailure(call: Call<PostListResponse>, t: Throwable) {
                     prgBarPost.visibility = View.GONE
                     Log.e("onFailure", "Err : ${t.message}")
                 }
-
             })
         }
     }
