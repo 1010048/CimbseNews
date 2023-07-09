@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
-import com.example.cimbsenews.DetailsPostActivity
+import com.example.cimbsenews.ui.DetailsPostActivity
 import com.example.cimbsenews.R
 import com.example.cimbsenews.databinding.ItemRowBinding
 import com.example.cimbsenews.response.PostListResponseItem
@@ -33,7 +33,7 @@ class PostAdapter(private val context: Context) :
         fun bind(item: PostListResponseItem) {
             binding.apply {
                 postName.text = item.item_name
-                AddedDateTextView.text = item.publish_date.toString()
+                AddedDateTextView.text = item.date
                 val postImageURL = item.image
                 imgPost.load(postImageURL) {
                     crossfade(true)

@@ -1,10 +1,12 @@
-package com.example.cimbsenews
+package com.example.cimbsenews.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cimbsenews.R
 import com.example.cimbsenews.adapter.PostAdapter
 import com.example.cimbsenews.api.ApiClient
 import com.example.cimbsenews.api.ApiService
@@ -24,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

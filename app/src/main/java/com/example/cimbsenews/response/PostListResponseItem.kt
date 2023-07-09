@@ -6,6 +6,7 @@ data class PostListResponseItem(
     val image: String,
     val item_name: String,
     val link: String,
+    val date: String,
     val publish_date: Int,
     val update_date: Int
 )

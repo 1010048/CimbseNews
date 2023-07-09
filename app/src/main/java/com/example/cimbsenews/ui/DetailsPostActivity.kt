@@ -1,4 +1,4 @@
-package com.example.cimbsenews
+package com.example.cimbsenews.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cimbsenews.R
 
 class DetailsPostActivity : AppCompatActivity() {
 
