@@ -47,6 +47,7 @@ class PostAdapter(private val context: Context) :
                     val context = itemView.context
                     val intent = Intent(context, DetailsPostActivity::class.java)
                     intent.putExtra(DetailsPostActivity.EXTRA_URL, item.link) // Replace 'url' with the actual URL property in your item
+                    intent.putExtra(DetailsPostActivity.EXTRA_POST_NAME, item.item_name)
                     context.startActivity(intent)
                 }
             }

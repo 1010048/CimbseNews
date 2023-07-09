@@ -8,6 +8,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cimbsenews.R
 
@@ -17,7 +18,7 @@ class DetailsPostActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var backButton: Button
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details_post)
@@ -28,11 +29,16 @@ class DetailsPostActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
 
         val url = intent.getStringExtra(EXTRA_URL)
+        val postName = intent.getStringExtra(EXTRA_POST_NAME)
+
         url?.let {
             webView.webChromeClient = WebChromeClient()
             webView.webViewClient = CustomWebViewClient()
             webView.loadUrl(it)
         }
+
+        val textViewPostName = findViewById<TextView>(R.id.toolbarCountieName)
+        textViewPostName.text = postName
 
         backButton.setOnClickListener {
             if (webView.canGoBack()) {
@@ -52,5 +58,6 @@ class DetailsPostActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_URL = "extra_url"
+        const val EXTRA_POST_NAME = "extra_post_name"
     }
 }
