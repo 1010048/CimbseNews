@@ -40,7 +40,7 @@ class PostAdapter(private val context: Context) :
                     placeholder(R.drawable.post_placeholder)
                     scale(Scale.FILL)
                 }
-                updateDateTextView.text = item.update_date.toString()
+                updateDateTextView.text = item.county
                 AuthorNameTextView.text = item.author
 
                 itemView.setOnClickListener {

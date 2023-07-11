@@ -37,8 +37,6 @@ class DetailsPostActivity : AppCompatActivity() {
             webView.loadUrl(it)
         }
 
-        val textViewPostName = findViewById<TextView>(R.id.toolbarCountieName)
-        textViewPostName.text = postName
 
         backButton.setOnClickListener {
             if (webView.canGoBack()) {
