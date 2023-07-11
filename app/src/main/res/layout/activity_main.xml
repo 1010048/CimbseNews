@@ -13,9 +13,16 @@
         android:background="@color/Indigo"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@id/rlPosts"
+        app:layout_constraintBottom_toTopOf="@id/searchView"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search..."
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/rlPosts"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rlPosts"
@@ -24,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
     <ProgressBar
         android:id="@+id/prgBarPost"
         android:layout_width="wrap_content"

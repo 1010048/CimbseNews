@@ -1,9 +1,10 @@
 package com.example.cimbsenews.adapter
-
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +14,14 @@ import com.example.cimbsenews.ui.DetailsPostActivity
 import com.example.cimbsenews.R
 import com.example.cimbsenews.databinding.ItemRowBinding
 import com.example.cimbsenews.response.PostListResponseItem
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PostAdapter(private val context: Context) :
-    ListAdapter<PostListResponseItem, PostAdapter.ViewHolder>(PostDiffCallback()) {
+    ListAdapter<PostListResponseItem, PostAdapter.ViewHolder>(PostDiffCallback()), Filterable {
+
+    private var postList: List<PostListResponseItem> = ArrayList()
+    private var filteredPostList: List<PostListResponseItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +30,38 @@ class PostAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(filteredPostList[position])
+    }
+
+    override fun getItemCount(): Int = filteredPostList.size
+
+    fun submitData(postList: List<PostListResponseItem>) {
+        this.postList = postList
+        this.filteredPostList = postList
+        notifyDataSetChanged()
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filterResults = FilterResults()
+                if (constraint.isNullOrEmpty()) {
+                    filterResults.values = postList
+                } else {
+                    val searchQuery = constraint.toString().toLowerCase(Locale.getDefault())
+                    val filteredList = postList.filter { item ->
+                        item.item_name.toLowerCase(Locale.getDefault()).contains(searchQuery)
+                    }
+                    filterResults.values = filteredList
+                }
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+                filteredPostList = results.values as List<PostListResponseItem>
+                notifyDataSetChanged()
+            }
+        }
     }
 
     inner class ViewHolder(private val binding: ItemRowBinding) :
@@ -46,7 +83,7 @@ class PostAdapter(private val context: Context) :
                 itemView.setOnClickListener {
                     val context = itemView.context
                     val intent = Intent(context, DetailsPostActivity::class.java)
-                    intent.putExtra(DetailsPostActivity.EXTRA_URL, item.link) // Replace 'url' with the actual URL property in your item
+                    intent.putExtra(DetailsPostActivity.EXTRA_URL, item.link)
                     intent.putExtra(DetailsPostActivity.EXTRA_POST_NAME, item.item_name)
                     context.startActivity(intent)
                 }
