@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cimbsenews.R
@@ -26,7 +25,6 @@ class SplashActivity : AppCompatActivity() {
             checkInternetConnection()
         }, SPLASH_DELAY)
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkInternetConnection() {
@@ -48,9 +46,5 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
