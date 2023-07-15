@@ -50,7 +50,7 @@ class PostAdapter(private val context: Context) :
                 } else {
                     val searchQuery = constraint.toString().toLowerCase(Locale.getDefault())
                     val filteredList = postList.filter { item ->
-                        item.item_name.toLowerCase(Locale.getDefault()).contains(searchQuery)
+                        item.item_name.lowercase(Locale.getDefault()).contains(searchQuery)
                     }
                     filterResults.values = filteredList
                 }

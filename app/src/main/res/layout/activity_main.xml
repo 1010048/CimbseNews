@@ -13,8 +13,63 @@
         android:background="@color/Indigo"
         app:titleTextColor="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintBottom_toTopOf="@id/rlPosts"
+        app:layout_constraintBottom_toTopOf="@id/cimbseHeader"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cimbseHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_header"
+        android:paddingLeft="20dp"
+        android:paddingTop="0dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@id/rlPosts"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        tools:layout_editor_absoluteX="10dp">
+
+        <TextView
+            android:id="@+id/welcomeToText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/welcome_to"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/nameCimbse"/>
+
+
+        <TextView
+            android:id="@+id/nameCimbse"
+            android:layout_width="71dp"
+            android:layout_height="18dp"
+            android:text="@string/name_cimbse"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/welcomeToText"
+            android:paddingLeft="10dp"
+             />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="169dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_cimbse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rlPosts"
@@ -23,7 +78,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/cimbseHeader" />
     <ProgressBar
         android:id="@+id/prgBarPost"
         android:layout_width="wrap_content"
