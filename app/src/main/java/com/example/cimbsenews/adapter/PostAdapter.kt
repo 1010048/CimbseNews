@@ -1,5 +1,5 @@
 package com.example.cimbsenews.adapter
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import com.example.cimbsenews.response.PostListResponseItem
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PostAdapter(private val context: Context) :
+class PostAdapter :
     ListAdapter<PostListResponseItem, PostAdapter.ViewHolder>(PostDiffCallback()), Filterable {
 
     private var postList: List<PostListResponseItem> = ArrayList()
@@ -35,6 +35,7 @@ class PostAdapter(private val context: Context) :
 
     override fun getItemCount(): Int = filteredPostList.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitData(postList: List<PostListResponseItem>) {
         this.postList = postList
         this.filteredPostList = postList
@@ -48,7 +49,7 @@ class PostAdapter(private val context: Context) :
                 if (constraint.isNullOrEmpty()) {
                     filterResults.values = postList
                 } else {
-                    val searchQuery = constraint.toString().toLowerCase(Locale.getDefault())
+                    val searchQuery = constraint.toString().lowercase(Locale.getDefault())
                     val filteredList = postList.filter { item ->
                         item.item_name.lowercase(Locale.getDefault()).contains(searchQuery)
                     }
@@ -57,6 +58,7 @@ class PostAdapter(private val context: Context) :
                 return filterResults
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(constraint: CharSequence?, results: FilterResults) {
                 filteredPostList = results.values as List<PostListResponseItem>
                 notifyDataSetChanged()

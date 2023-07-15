@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
         setSupportActionBar(toolbar)
 
-        postAdapter = PostAdapter(this)
+        postAdapter = PostAdapter()
         binding.rlPosts.layoutManager = LinearLayoutManager(this)
         binding.rlPosts.adapter = postAdapter
 
